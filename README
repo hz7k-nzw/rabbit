@@ -1,0 +1,159 @@
+This package contains the code for the SCHEME interpreter and
+the RABBIT compiler from the Steele & Sussman "lambda papers"
+(http://library.readscheme.org/page1.html), with a few minor
+changes made by Kenji Nozawa, so that it would work under a
+toy lisp system written in Java.
+
+
+== License
+
+All files included in this package is licensed under
+the Creative Commons Attribution 3.0 Unported License:
+
+ http://creativecommons.org/licenses/by/3.0/
+
+
+== Manifest
+
+rabbit/scheme.lisp
+ LISP code for the SCHEME interpreter by Gerald Jay Sussman and
+ Guy Lewis Steele, Jr.. [1]
+
+ This source code includes the detailed page-by-page notes on the
+ code in the original paper, and also includes the code for macro
+ by Darius Bacon (http://wry.me/), which is not included in the
+ original paper.
+
+rabbit/AIM-349.scm
+ Example SCHEME code from the same paper. [1]
+
+rabbit/rabbit.scm
+ SCHEME code for the RABBIT compiler by Guy Lewis Steele, Jr.. [2]
+
+ This source code is taken from the CMU Scheme Repository
+ (http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/scheme/impl/rabbit/)
+ and I transcribed the detailed page-by-page notes included in the
+ original paper into the above file.
+
+rabbit/fact.scm
+rabbit/fib.scm
+rabbit/hello.scm
+ Example SCHEME code
+
+rabbit/sample_output/fact.lisp
+rabbit/sample_output/fib.lisp
+rabbit/sample_output/hello.lisp
+ Example output emitted by the RABBIT compiler
+
+rabbit/README
+ This file
+
+
+== Getting Started
+
+1. Download LAPIN (a toy lisp system written in Java)
+You can download the source distribution from the following URL:
+
+http://www.asahi-net.or.jp/~hz7k-nzw/lapin/
+
+and then extract the .tar.gz file by the following command:
+
+$ gzip -dc lapin-<version>-src.tar.gz | tar xf -
+
+2. Build LAPIN
+Execute the following commands:
+
+$ pwd
+/PATH/TO/LAPIN_PRJ
+
+'/PATH/TO/LAPIN_PRJ' denotes a path to the directory in which
+the source distribution is extracted.
+
+$ ant dist
+
+This will create files for the binary distribution in the 'dist' directory.
+
+3. Download scheme.tar.gz
+You can download 'scheme.tar.gz' from the following URL:
+
+http://www.asahi-net.or.jp/~hz7k-nzw/lapin/scheme.tar.gz
+
+Put the .tar.gz file in the 'dist' directory
+and then execute the following command:
+
+$ gzip -dc scheme.tar.gz | tar xf -
+
+4. Run LAPIN, SCHEME, and RABBIT
+Execute the following commands:
+
+$ pwd
+/PATH/TO/LAPIN_PRJ/dist
+
+$ bin/lapin.sh 
+hello!
+
+;;; 4-1. Compile and load the SCHEME interpreter.
+USER> (load (compile-file "rabbit/scheme"))
+
+T
+
+;;; 4-2. Run the SCHEME interpreter.
+;;; This will activate the SCHEME interpreter under LAPIN.
+USER> (scheme)
+
+This is SCHEME xxx running in LISP yyy
+SCHEME -- Toplevel
+
+;;; 4-3. Load the RABBIT compiler in the SCHEME environment.
+==> (aload "rabbit/rabbit.scm")
+
+T 
+
+;;; 4-4. Load the example
+==> (aload "rabbit/fact.scm")
+
+T 
+
+==> fact
+
+(BETA (LAMBDA (N) (IF (= N 0) 1 (* N (FACT (- N 1))))) NIL) 
+
+==> (fact 5)  
+
+120 
+
+;;; 4-5. Compile the example.
+==> (comfile "rabbit/fact.scm") ; output: rabbit/fact.lisp
+
+; beginning rabbit compilation on "rabbit/fact.scm"
+(FACT COMPILED) 
+(FACT-ITER COMPILED) 
+(|init-rabbit/fact| COMPILED) 
+(COMPILE TIME 9 SECONDS) 
+
+;;; 4-6. Execute the example.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SORRY, UNDER CONSTRUCTION ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; type Ctrl-D to exit SCHEME
+==> [This will exit SCHEME interpreter with eof-error]
+
+;;; type Ctrl-D to exit LAPIN
+USER> ^D
+bye!
+
+$
+
+
+== References
+
+[1] Gerald Jay Sussman and Guy Lewis Steele, Jr..
+    "Scheme: An Interpreter for Extended Lambda Calculus".
+    MIT AI Lab. AI Lab Memo AIM-349. December 1975.
+
+[2] Guy Lewis Steele, Jr..
+    "RABBIT: A Compiler for SCHEME". Masters Thesis.
+    MIT AI Lab. AI Lab Technical Report AITR-474. May 1978.
+
