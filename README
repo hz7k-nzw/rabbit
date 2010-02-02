@@ -73,15 +73,15 @@ $ ant dist
 
 This will create files for the binary distribution in the 'dist' directory.
 
-3. Download scheme.tar.gz
-You can download 'scheme.tar.gz' from the following URL:
+3. Download rabbit.tar.gz
+You can download 'rabbit.tar.gz' from the following URL:
 
-http://www.asahi-net.or.jp/~hz7k-nzw/lapin/scheme.tar.gz
+http://www.asahi-net.or.jp/~hz7k-nzw/lapin/rabbit.tar.gz
 
 Put the .tar.gz file in the 'dist' directory
 and then execute the following command:
 
-$ gzip -dc scheme.tar.gz | tar xf -
+$ gzip -dc rabbit.tar.gz | tar xf -
 
 4. Run LAPIN, SCHEME, and RABBIT
 Execute the following commands:
