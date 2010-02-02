@@ -138,13 +138,13 @@ T
 120 
 
 ;;; 4-5. Compile and load the example.
-==> (compile-and-load "scheme/fact.scm")
+==> (compile-and-load "rabbit/fact.scm")
 
-; beginning rabbit compilation on "scheme/fact.scm"
+; beginning rabbit compilation on "rabbit/fact.scm"
 (FACT COMPILED) 
 (FACT-ITER COMPILED) 
-(|init-scheme/fact| COMPILED) 
-"scheme/fact.lisp" 
+(|init-rabbit/fact| COMPILED)
+"rabbit/fact.lisp"
 "loaded." 
 "loaded." 
 
