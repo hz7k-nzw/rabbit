@@ -772,3 +772,18 @@
 	       (block (f (car xs))
 	         (amapc f (cdr xs)))))
 	 nil))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ENCLOSE was originally included in trampoline.lisp by Darius
+;;; Bacon, and moved here for better classification
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; The need for this came up when trying to get RABBIT to compile itself.
+;; (When it tried to handle a PROCLAIM form.)
+(defvar enclose
+  '(beta (lambda (lambda-exp)
+           ;; XXX I dunno if this is just what ENCLOSE is supposed to do.
+           ;; But something like this...
+           (list 'beta lambda-exp nil))
+         nil))
+

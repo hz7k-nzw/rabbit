@@ -4,6 +4,9 @@ the RABBIT compiler from the Steele & Sussman "lambda papers"
 changes made by Kenji Nozawa, so that it would work under a
 toy lisp system written in Java.
 
+This package also includes a driver program for the RABBIT-
+compiled code, implemented by Darius Bacon.
+
 
 == License
 
@@ -26,6 +29,13 @@ rabbit/scheme.lisp
 
 rabbit/AIM-349.scm
  Example SCHEME code from the same paper. [1]
+
+rabbit/trampoline.lisp
+ LISP code for RABBIT-compiled code driver
+ by Darius Bacon (http://wry.me/)
+
+rabbit/rabbit_scheme.lisp
+ scheme.lisp + trampoline.lisp, concatenated by Kenji Nozawa
 
 rabbit/rabbit.scm
  SCHEME code for the RABBIT compiler by Guy Lewis Steele, Jr.. [2]
@@ -92,17 +102,22 @@ $ pwd
 $ bin/lapin.sh 
 hello!
 
-;;; 4-1. Compile and load the SCHEME interpreter.
-USER> (load (compile-file "rabbit/scheme"))
+;;; 4-1. Compile and load the SCHEME interpreter and
+;;;      the RABBIT-compiled code driver.
+USER> (load (compile-file "rabbit/trampoline.lisp"))
+
+T
+
+USER> (load (compile-file "rabbit/scheme.lisp"))
 
 T
 
 ;;; 4-2. Run the SCHEME interpreter.
 ;;; This will activate the SCHEME interpreter under LAPIN.
-USER> (scheme)
+USER> (rabbit-scheme)
 
-This is SCHEME xxx running in LISP yyy
-SCHEME -- Toplevel
+This is SCHEME modified for RABBIT interoperability
+RABBIT-SCHEME -- Toplevel
 
 ;;; 4-3. Load the RABBIT compiler in the SCHEME environment.
 ==> (aload "rabbit/rabbit.scm")
@@ -122,20 +137,24 @@ T
 
 120 
 
-;;; 4-5. Compile the example.
-==> (comfile "rabbit/fact.scm") ; output: rabbit/fact.lisp
+;;; 4-5. Compile and load the example.
+==> (compile-and-load "scheme/fact.scm")
 
-; beginning rabbit compilation on "rabbit/fact.scm"
+; beginning rabbit compilation on "scheme/fact.scm"
 (FACT COMPILED) 
 (FACT-ITER COMPILED) 
-(|init-rabbit/fact| COMPILED) 
-(COMPILE TIME 9 SECONDS) 
+(|init-scheme/fact| COMPILED) 
+"scheme/fact.lisp" 
+"loaded." 
+"loaded." 
 
-;;; 4-6. Execute the example.
+==> fact
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SORRY, UNDER CONSTRUCTION ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(CBETA #<EXPR: (LAMBDA NIL ... )> F-20) 
+
+==> (fact 5)
+
+120
 
 ;;; type Ctrl-D to exit SCHEME
 ==> [This will exit SCHEME interpreter with eof-error]
