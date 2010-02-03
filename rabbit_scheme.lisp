@@ -538,9 +538,12 @@
   '(beta (lambda (fname)
            (block
              (comfile fname)              ;from rabbit.scm
-             (load (java:string-replace-first fname "\\.scm" ".lisp"))
-             (print (java:string-replace-first fname "\\.scm" ".lisp"))
-             (print "loaded.")))
+             (terpri)
+             (compile-file (java:string-replace-first fname "\\.scm" ".lisp"))
+             (format t "~A compiled~%" (java:string-replace-first fname "\\.scm" ".lisp"))
+             (load (java:string-replace-first fname "\\.scm" ".fasl"))
+             (format t "~A loaded~%" (java:string-replace-first fname "\\.scm" ".fasl"))
+             T))
          nil))
 
 (defun bounce-off ()
