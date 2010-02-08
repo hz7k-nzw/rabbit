@@ -104,11 +104,11 @@ hello!
 
 ;;; 4-1. Compile and load the SCHEME interpreter and
 ;;;      the RABBIT-compiled code driver.
-USER> (load (compile-file "rabbit/trampoline.lisp"))
+USER> (load (compile-file "rabbit/scheme.lisp"))
 
 T
 
-USER> (load (compile-file "rabbit/scheme.lisp"))
+USER> (load (compile-file "rabbit/trampoline.lisp"))
 
 T
 
