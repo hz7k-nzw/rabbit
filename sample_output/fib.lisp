@@ -37,7 +37,10 @@
 	       (SETQ **FUN** (CADDR **ENV**))
 	       (SETQ **ONE** (+ (CAR **ENV**) **ONE**))
 	       (RETURN NIL)))
-       (SETQ |rabbit/fib-92| (GET (QUOTE |rabbit/fib-92|) (QUOTE EXPR)))
+       (SETQ |rabbit/fib-92| (OR (GET (QUOTE |rabbit/fib-92|) (QUOTE SUBR))
+				 (GET (QUOTE |rabbit/fib-92|) (QUOTE EXPR))
+				 (ERROR "Either SUBR or EXPR is expected"
+					(QUOTE |rabbit/fib-92|))))
        (SETQ FIB (LIST (QUOTE CBETA) |rabbit/fib-92| (QUOTE F-91)))
        (DEFPROP |rabbit/fib-92| FIB USER-FUNCTION)) 
 (PROGN (QUOTE COMPILE) (COMMENT MODULE FOR FUNCTION |init-rabbit/fib|)
@@ -48,7 +51,10 @@
 	       (SETQ **FUN** **CONT**)
 	       (SETQ **ONE** (QUOTE NIL))
 	       (RETURN NIL)))
-       (SETQ |rabbit/fib-102| (GET (QUOTE |rabbit/fib-102|) (QUOTE EXPR)))
+       (SETQ |rabbit/fib-102| (OR (GET (QUOTE |rabbit/fib-102|) (QUOTE SUBR))
+				  (GET (QUOTE |rabbit/fib-102|) (QUOTE EXPR))
+				  (ERROR "Either SUBR or EXPR is expected"
+					 (QUOTE |rabbit/fib-102|))))
        (SETQ |init-rabbit/fib| (LIST (QUOTE CBETA) |rabbit/fib-102| (QUOTE F-101)))
        (DEFPROP |rabbit/fib-102| |init-rabbit/fib| USER-FUNCTION)) 
 (COMMENT (COMPILE TIME 5 SECONDS)) 
