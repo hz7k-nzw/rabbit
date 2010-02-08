@@ -144,13 +144,12 @@ T
 (FACT COMPILED) 
 (FACT-ITER COMPILED) 
 (|init-rabbit/fact| COMPILED)
-"rabbit/fact.lisp"
-"loaded." 
-"loaded." 
+rabbit/fact.lisp compiled
+rabbit/fact.fasl loaded
 
 ==> fact
 
-(CBETA #<EXPR: (LAMBDA NIL ... )> F-20) 
+(CBETA #<COMPILED-EXPR:rabbit/fact-21:lapin.function.subrs.gen.rabbit.fact.fun$0> F-20)
 
 ==> (fact 5)
 
